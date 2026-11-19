@@ -1,0 +1,7 @@
+build/
+*.vcd
+*.fst
+*.px
+*.log
+.env
+.DS_Store
