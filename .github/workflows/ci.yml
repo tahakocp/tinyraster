@@ -1,0 +1,20 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  sim:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: tools
+        run: sudo apt-get update && sudo apt-get install -y iverilog yosys
+      - name: tests
+        run: make test
+      - name: synth
+        run: make synth
+      - name: demo render is reproducible
+        run: |
+          make render
+          git diff --exit-code docs/images/demo.png
